@@ -363,14 +363,19 @@ struct PlayerView: View {
             }
             
             // CaDi mic on Player (optional)
-            HoldToTalkButton(isListening: $cadi.isListening, onRelease: {
-                Task { await cadi.handlePushToTalk(getContext: { "Reviewing last swing clip" }) }
-            }, label: "Ask CaDi")
+            GolfMicButton(
+                isListening: cadi.isListening,
+                onPressStart: { cadi.isListening = true },
+                onPressEnd: {
+                    cadi.isListening = false
+                    Task { await cadi.handlePushToTalk(getContext: { "Reviewing last swing clip" }) }
+                }
+            )
             .padding(.top, 8)
             
             HStack {
                 Button {
-                    ShareExportManager().exportWithCaption(videoURL: videoURL, caption: cadi.lastResponse ?? "ForePlay – Swing Review") { url in
+                    ShareExportManager.exportWithOverlays(source: videoURL, caption: cadi.lastResponse ?? "ForePlay – Swing Review") { url in
                         self.exportedURL = url
                         self.showShare = (url != nil)
                     }
@@ -386,12 +391,12 @@ struct PlayerView: View {
         .onDisappear { player.pause() }
         .sheet(isPresented: $showCompare) {
             if let other = compareWithURL {
-                ComparisonView(aURL: videoURL, bURL: other)
+                ComparisonView(left: videoURL, right: other)
             }
         }
         .sheet(isPresented: $showShare) {
             if let u = exportedURL {
-                ShareSheet(activityItems: [u])
+                ShareExportManager.ShareSheet(activityItems: [u])
             }
         }
     }
@@ -518,7 +523,7 @@ final class CaDiKit: ObservableObject {
     }
 
     func handlePushToTalk(getContext: () -> String) async {
-        let ctx = getContext()
+        let _ = getContext()  // Context available for future use
         
         // Use analysis results if available, otherwise fall back to generic coaching
         if let analysis = lastAnalysis {
