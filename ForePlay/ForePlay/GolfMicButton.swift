@@ -53,9 +53,7 @@ struct GolfMicButton: View {
 }
 
 // MARK: - Extensions
-extension Color {
-    static let fpNavy = Color(red: 0.043, green: 0.145, blue: 0.271)
-}
+
 
 // MARK: - Preview
 #if DEBUG

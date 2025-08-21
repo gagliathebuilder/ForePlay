@@ -3,19 +3,11 @@ import AVFoundation
 import AVFAudio
 import AVKit
 import Speech
-#if canImport(UIKit)
-// UIKit guarded import (top)
-#if canImport(UIKit)
-// UIKit guarded import (StorageManager section)
-#if canImport(UIKit)
+import Vision
+import CoreMedia
 #if canImport(UIKit)
 import UIKit
 #endif
-#endif
-#endif
-#endif
-import Vision
-import CoreMedia
 
 
 @main
@@ -413,118 +405,14 @@ struct PlayerView: View {
 // =============================================================
 // File: ComparisonView.swift (overlay A over B with slider)
 // =============================================================
-import AVKit
-
-struct ComparisonView: View {
-    let aURL: URL // current
-    let bURL: URL // previous
-    @State private var opacity: Double = 0.5
-    var body: some View {
-        VStack(spacing: 12) {
-            ZStack {
-                VideoPlayer(player: AVPlayer(url: bURL))
-                VideoPlayer(player: AVPlayer(url: aURL))
-                    .opacity(opacity)
-            }
-            .frame(height: 360)
-            .clipped()
-            
-            HStack { Text("A"); Slider(value: $opacity, in: 0...1); Text("B") }
-                .padding(.horizontal)
-            Text("Overlay your last swing vs current one.").font(.footnote).foregroundColor(.secondary)
-            Spacer()
-        }
-        .padding()
-    }
-}
+// This has been moved to ComparisonView.swift
 
 // =============================================================
 // File: HoldToTalkButton.swift (push-to-talk mic UI)
 // =============================================================
-import SwiftUI
+// HoldToTalkButton removed - now using GolfMicButton from GolfMicButton.swift
 
-struct HoldToTalkButton: View {
-    @Binding var isListening: Bool
-    var onRelease: () -> Void
-    var label: String = "Hold to talk"
-
-    var body: some View {
-        VStack(spacing: 8) {
-            GolfBallCircle(fillColor: isListening ? .red : .white)
-                .frame(width: 80, height: 80)
-                .overlay(
-                    ZStack {
-                        Circle().stroke(Color.fpGold.opacity(0.8), lineWidth: 2)
-                        Image(systemName: "mic.fill")
-                            .font(.system(size: 28, weight: .bold))
-                            .foregroundColor(isListening ? .white : .fpNavy)
-                    }
-                )
-                .scaleEffect(isListening ? 1.06 : 1.0)
-                .animation(.spring(response: 0.25, dampingFraction: 0.6), value: isListening)
-                .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 6)
-                .gesture(
-                    DragGesture(minimumDistance: 0)
-                        .onChanged { _ in
-                            if !isListening {
-                                isListening = true
-                                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                            }
-                        }
-                        .onEnded { _ in
-                            isListening = false
-                            onRelease()
-                        }
-                )
-                .accessibilityLabel("Hold to talk to CaDi")
-            Text(label)
-                .font(.caption.bold())
-                .foregroundColor(.white)
-                .shadow(radius: 4)
-        }
-    }
-}
-
-// Golf ball look-and-feel
-struct GolfBallCircle: View {
-    var fillColor: Color = .white
-    var body: some View {
-        ZStack {
-            Circle()
-                .fill(
-                    RadialGradient(colors: [fillColor, fillColor.opacity(0.85)], center: .topLeading, startRadius: 6, endRadius: 60)
-                )
-            // Dimples grid
-            DimplesPattern()
-                .clipShape(Circle())
-                .opacity(fillColor == .white ? 0.35 : 0.15)
-        }
-    }
-}
-
-struct DimplesPattern: View {
-    var body: some View {
-        GeometryReader { geo in
-            let size = geo.size
-            let step: CGFloat = max(6, min(size.width, size.height) / 8)
-            Path { p in
-                var y: CGFloat = step * 0.6
-                var row = 0
-                while y < size.height {
-                    let offset = (row % 2 == 0) ? 0 : step / 2
-                    var x: CGFloat = step * 0.6 + offset
-                    while x < size.width {
-                        p.addEllipse(in: CGRect(x: x - 1.2, y: y - 1.2, width: 2.4, height: 2.4))
-                        x += step
-                    }
-                    row += 1
-                    y += step * 0.85
-                }
-            }
-            .fill(Color.black.opacity(0.15))
-        }
-    }
-}
+// Golf ball look-and-feel components removed - now in GolfMicButton.swift
 
 
 // =============================================================
@@ -547,8 +435,6 @@ final class CaDiKit: ObservableObject {
     private var request: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let synthesizer = AVSpeechSynthesizer()
-    private let voiceEngine: VoiceEngine
-
     // Playback rate state mirrored for UI label
     @Published var playbackRateLabel: String = "0.5x"
     private var currentRateIndex = 1 // 0:0.25, 1:0.5, 2:1.0
@@ -560,12 +446,7 @@ final class CaDiKit: ObservableObject {
     }
 
     init() {
-        let key = Bundle.main.object(forInfoDictionaryKey: "OPENAI_API_KEY") as? String
-        if let key, !key.isEmpty {
-            self.voiceEngine = OpenAIVoiceEngine(apiKey: key)
-        } else {
-            self.voiceEngine = SystemTTSVoiceEngine()
-        }
+        // VoiceEngine is now a static utility, no initialization needed
     }
 
     func prepareSpeech() async {
@@ -719,15 +600,7 @@ final class CaDiKit: ObservableObject {
     }
 
     // MARK: - Voice quality helpers
-    private func bestVoice(locale: String = "en-US") -> AVSpeechSynthesisVoice? {
-        let voices = AVSpeechSynthesisVoice.speechVoices().filter { $0.language == locale }
-        let ranked = voices.sorted { a, b in
-            let qa = a.quality.rawValue, qb = b.quality.rawValue
-            if qa != qb { return qa > qb } // premium > enhanced > default
-            return (a.name.contains("Siri") ? 1 : 0) > (b.name.contains("Siri") ? 1 : 0)
-        }
-        return ranked.first ?? AVSpeechSynthesisVoice(language: locale)
-    }
+    // bestVoice method removed - now handled by VoiceEngine.swift
 
     private func speak(_ text: String) { 
         VoiceEngine.speak(text)
@@ -747,400 +620,17 @@ enum CaDiHeuristics {
 // =============================================================
 // File: OpenAIVoice.swift (native voices via TTS API, with fallback)
 // =============================================================
-protocol VoiceEngine {
-    func speak(_ text: String)
-}
-
-final class SystemTTSVoiceEngine: VoiceEngine {
-    private let synthesizer = AVSpeechSynthesizer()
-    private func bestVoice(locale: String = "en-US") -> AVSpeechSynthesisVoice? {
-        let voices = AVSpeechSynthesisVoice.speechVoices().filter { $0.language == locale }
-        let ranked = voices.sorted { a, b in
-            let qa = a.quality.rawValue, qb = b.quality.rawValue
-            if qa != qb { return qa > qb }
-            return (a.name.contains("Siri") ? 1 : 0) > (b.name.contains("Siri") ? 1 : 0)
-        }
-        return ranked.first ?? AVSpeechSynthesisVoice(language: locale)
-    }
-    func speak(_ text: String) {
-        let parts = text.split(separator: "\n").map(String.init)
-        for (i, p) in parts.enumerated() {
-            let u = AVSpeechUtterance(string: p)
-            u.voice = bestVoice() ?? AVSpeechSynthesisVoice(language: "en-US")
-            u.rate = 0.44
-            u.pitchMultiplier = 1.05
-            u.preUtteranceDelay = i == 0 ? 0.05 : 0.12
-            u.postUtteranceDelay = 0.10
-            synthesizer.speak(u)
-        }
-    }
-}
-
-final class OpenAIVoiceEngine: NSObject, VoiceEngine, AVAudioPlayerDelegate {
-    private var player: AVAudioPlayer?
-    private let apiKey: String?
-    private let voice: String
-    private let model: String
-    init(apiKey: String?, voice: String = "alloy", model: String = "tts-1") {
-        self.apiKey = apiKey
-        self.voice = voice
-        self.model = model
-    }
-    func speak(_ text: String) {
-        guard let apiKey = apiKey, !apiKey.isEmpty else {
-            SystemTTSVoiceEngine().speak(text)
-            return
-        }
-        Task { await requestAndPlay(text: text, apiKey: apiKey) }
-    }
-    private func requestAndPlay(text: String, apiKey: String) async {
-        guard let url = URL(string: "https://api.openai.com/v1/audio/speech") else { return }
-        var req = URLRequest(url: url)
-        req.httpMethod = "POST"
-        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        req.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-        
-        let body: [String: Any] = [
-            "model": model,
-            "voice": voice,
-            "input": text,
-            "format": "mp3"
-        ]
-        
-        req.httpBody = try? JSONSerialization.data(withJSONObject: body)
-        
-        do {
-            let (data, response) = try await URLSession.shared.data(for: req)
-            
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                throw URLError(.badServerResponse)
-            }
-            
-            try await MainActor.run {
-                self.player = try? AVAudioPlayer(data: data)
-                self.player?.delegate = self
-                self.player?.prepareToPlay()
-                self.player?.play()
-            }
-        } catch {
-            print("OpenAI TTS failed: \(error), falling back to system voice")
-            SystemTTSVoiceEngine().speak(text)
-        }
-    }
-    
-    // MARK: - AVAudioPlayerDelegate
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        self.player = nil
-    }
-    
-    func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
-        print("Audio decode error: \(error?.localizedDescription ?? "unknown")")
-        self.player = nil
-    }
-}
+// This has been moved to VoiceEngine.swift
 
 // =============================================================
 // File: SwingAnalyzer.swift (Vision pose scaffolding + overlay model)
 // =============================================================
-import Vision
-
-// MARK: - Analysis Models
-struct AnalysisResult {
-    let tempo: TempoMetric
-    let plane: PlaneMetric
-    let sway: SwayMetric
-    let confidence: Float
-    let processingTime: TimeInterval
-    
-    var summaryChip: String {
-        let tempoStr = String(format: "%.1f:1", tempo.ratio)
-        let planeStr = String(format: "%.0f°", plane.angleAtTop)
-        let swayStr = String(format: "%+.0fcm", sway.deltaCm)
-        return "Tempo \(tempoStr) • Plane \(planeStr) • Sway \(swayStr)"
-    }
-}
-
-struct TempoMetric {
-    let backswingTime: TimeInterval
-    let downswingTime: TimeInterval
-    let ratio: Float
-    
-    var isGood: Bool { ratio >= 2.5 && ratio <= 3.5 }
-    var feedback: String {
-        if ratio < 2.5 { return "Too fast on the way down" }
-        if ratio > 3.5 { return "Slow down your transition" }
-        return "Good tempo rhythm"
-    }
-}
-
-struct PlaneMetric {
-    let angleAtTop: Float // degrees from horizontal
-    var isSteep: Bool { angleAtTop > 60 }
-    var isFlat: Bool { angleAtTop < 45 }
-    
-    var feedback: String {
-        if isSteep { return "Shaft too steep at top" }
-        if isFlat { return "Shaft too flat at top" }
-        return "Good shaft angle"
-    }
-}
-
-struct SwayMetric {
-    let startX: Float
-    let impactX: Float
-    let deltaCm: Float // positive = sway right, negative = sway left
-    
-    var isExcessive: Bool { abs(deltaCm) > 8 }
-    var feedback: String {
-        if deltaCm > 8 { return "Too much rightward hip sway" }
-        if deltaCm < -8 { return "Too much leftward hip sway" }
-        return "Good hip stability"
-    }
-}
-
-struct SwingPose {
-    let joints: [VNHumanBodyPoseObservation.JointName: CGPoint] // normalized [0,1]
-    
-    init(from observation: VNHumanBodyPoseObservation) {
-        var map: [VNHumanBodyPoseObservation.JointName: CGPoint] = [:]
-        
-        let allJoints: [VNHumanBodyPoseObservation.JointName] = [
-            .neck, .rightShoulder, .rightElbow, .rightWrist,
-            .leftShoulder, .leftElbow, .leftWrist,
-            .root, .rightHip, .rightKnee, .rightAnkle,
-            .leftHip, .leftKnee, .leftAnkle
-        ]
-        
-        for joint in allJoints {
-            if let point = try? observation.recognizedPoint(joint), point.confidence > 0.2 {
-                map[joint] = CGPoint(x: CGFloat(point.x), y: CGFloat(1 - point.y))
-            }
-        }
-        
-        self.joints = map
-    }
-}
-
-@MainActor
-final class SwingAnalyzer: ObservableObject {
-    @Published var currentPose: SwingPose?
-    @Published var isAnalyzing: Bool = false
-    @Published var lastAnalysis: AnalysisResult?
-    
-    private let request = VNDetectHumanBodyPoseRequest()
-    private let handlerQueue = DispatchQueue(label: "swing.analyzer.queue", qos: .userInitiated)
-    private var lastProcessTime: CFTimeInterval = 0
-    private let throttle: CFTimeInterval = 1.0 / 12.0 // ~12 fps for live view
-    
-    // MARK: - Live Pose Processing
-    func process(sampleBuffer: CMSampleBuffer) {
-        let now = CACurrentMediaTime()
-        if now - lastProcessTime < throttle { return }
-        lastProcessTime = now
-        
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
-        let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right, options: [:])
-        
-        handlerQueue.async {
-            do {
-                try handler.perform([self.request])
-                guard let obs = self.request.results?.first as? VNHumanBodyPoseObservation else { return }
-                
-                let pose = SwingPose(from: obs)
-                DispatchQueue.main.async {
-                    self.currentPose = pose
-                }
-            } catch { /* ignore for MVP */ }
-        }
-    }
-    
-    // MARK: - Recorded Clip Analysis
-    func analyzeRecordedClip(url: URL) async -> AnalysisResult? {
-        isAnalyzing = true
-        defer { isAnalyzing = false }
-        
-        let startTime = CACurrentMediaTime()
-        
-        do {
-            let asset = AVAsset(url: url)
-            let duration = try await asset.load(.duration)
-            let durationSeconds = CMTimeGetSeconds(duration)
-            
-            // Sample 24 frames evenly across the swing
-            let frameCount = 24
-            let frameInterval = durationSeconds / Double(frameCount - 1)
-            
-            var poses: [SwingPose] = []
-            var times: [TimeInterval] = []
-            
-            for i in 0..<frameCount {
-                let time = Double(i) * frameInterval
-                let cmTime = CMTime(seconds: time, preferredTimescale: 600)
-                
-                if let pose = try await extractPose(from: asset, at: cmTime) {
-                    poses.append(pose)
-                    times.append(time)
-                }
-            }
-            
-            guard poses.count >= 12 else { return nil } // Need minimum frames
-            
-            // Calculate metrics
-            let tempo = calculateTempo(poses: poses, times: times)
-            let plane = calculatePlane(poses: poses, times: times)
-            let sway = calculateSway(poses: poses, times: times)
-            
-            let confidence = Float(poses.count) / Float(frameCount)
-            let processingTime = CACurrentMediaTime() - startTime
-            
-            let result = AnalysisResult(
-                tempo: tempo,
-                plane: plane,
-                sway: sway,
-                confidence: confidence,
-                processingTime: processingTime
-            )
-            
-            lastAnalysis = result
-            return result
-            
-        } catch {
-            print("Analysis failed: \(error)")
-            return nil
-        }
-    }
-    
-    // MARK: - Private Analysis Methods
-    private func extractPose(from asset: AVAsset, at time: CMTime) async throws -> SwingPose? {
-        let generator = AVAssetImageGenerator(asset: asset)
-        generator.appliesPreferredTrackTransform = true
-        generator.requestedTimeToleranceBefore = .zero
-        generator.requestedTimeToleranceAfter = .zero
-        
-        let cgImage = try generator.copyCGImage(at: time, actualTime: nil)
-        let ciImage = CIImage(cgImage: cgImage)
-        
-        let handler = VNImageRequestHandler(ciImage: ciImage, options: [:])
-        try handler.perform([request])
-        
-        guard let obs = request.results?.first as? VNHumanBodyPoseObservation else { return nil }
-        return SwingPose(from: obs)
-    }
-    
-    private func calculateTempo(poses: [SwingPose], times: [TimeInterval]) -> TempoMetric {
-        // Find backswing top (highest hands position)
-        var maxHandY: Float = 0
-        var topIndex = 0
-        
-        for (i, pose) in poses.enumerated() {
-            let handY = (pose.joints[.leftWrist]?.y ?? 0) + (pose.joints[.rightWrist]?.y ?? 0) / 2
-            if handY > maxHandY {
-                maxHandY = handY
-                topIndex = i
-            }
-        }
-        
-        let backswingTime = times[topIndex]
-        let downswingTime = times.last! - backswingTime
-        let ratio = Float(backswingTime / downswingTime)
-        
-        return TempoMetric(
-            backswingTime: backswingTime,
-            downswingTime: downswingTime,
-            ratio: ratio
-        )
-    }
-    
-    private func calculatePlane(poses: [SwingPose], times: [TimeInterval]) -> PlaneMetric {
-        // Find top of backswing (highest hands)
-        var maxHandY: Float = 0
-        var topIndex = 0
-        
-        for (i, pose) in poses.enumerated() {
-            let handY = (pose.joints[.leftWrist]?.y ?? 0) + (pose.joints[.rightWrist]?.y ?? 0) / 2
-            if handY > maxHandY {
-                maxHandY = handY
-                topIndex = i
-            }
-        }
-        
-        let topPose = poses[topIndex]
-        
-        // Calculate shaft angle from shoulder to hands
-        guard let leftShoulder = topPose.joints[.leftShoulder],
-              let leftWrist = topPose.joints[.leftWrist] else {
-            return PlaneMetric(angleAtTop: 45) // Default
-        }
-        
-        let dx = leftWrist.x - leftShoulder.x
-        let dy = leftWrist.y - leftShoulder.y
-        let angle = atan2(dy, dx) * 180 / .pi
-        
-        return PlaneMetric(angleAtTop: Float(angle))
-    }
-    
-    private func calculateSway(poses: [SwingPose], times: [TimeInterval]) -> SwayMetric {
-        guard let startPose = poses.first,
-              let impactPose = poses.last,
-              let startHip = startPose.joints[.root],
-              let impactHip = impactPose.joints[.root] else {
-            return SwayMetric(startX: 0, impactX: 0, deltaCm: 0)
-        }
-        
-        // Convert normalized coordinates to approximate cm
-        // Assuming 1.0 = ~100cm for typical swing view
-        let startX = startHip.x * 100
-        let impactX = impactHip.x * 100
-        let deltaCm = (impactX - startX) * 100 // Convert to cm
-        
-        return SwayMetric(startX: startX, impactX: impactX, deltaCm: deltaCm)
-    }
-    
-    // MARK: - Coaching Feedback
-    func getCoachingFeedback(for result: AnalysisResult) -> (cue: String, drill: String) {
-        var cues: [String] = []
-        var drills: [String] = []
-        
-        // Tempo feedback
-        if !result.tempo.isGood {
-            cues.append(result.tempo.feedback)
-            if result.tempo.ratio < 2.5 {
-                drills.append("Count 1-2 to top, 3 through impact")
-            } else {
-                drills.append("Pause at top for 1 count")
-            }
-        }
-        
-        // Plane feedback
-        if result.plane.isSteep || result.plane.isFlat {
-            cues.append(result.plane.feedback)
-            drills.append("Practice half-swings with alignment stick")
-        }
-        
-        // Sway feedback
-        if result.sway.isExcessive {
-            cues.append(result.sway.feedback)
-            drills.append("Keep trail hip back through impact")
-        }
-        
-        // Default if no issues
-        if cues.isEmpty {
-            cues.append("Good swing fundamentals")
-            drills.append("Continue with current form")
-        }
-        
-        return (
-            cue: cues.first ?? "Keep practicing",
-            drill: drills.first ?? "Focus on tempo"
-        )
-    }
-}
+// This has been replaced by the new AnalysisKit.swift file
 
 // PoseOverlayView removed - replaced by OverlayEditor
 // =============================================================
 // File: StorageManager.swift (local videos + thumbnails)
 // =============================================================
-import UIKit
 import AVFoundation
 
 final class StorageManager {
@@ -1216,70 +706,7 @@ enum LibraryHelper {
 // =============================================================
 // File: ShareExportManager.swift (caption overlay export)
 // =============================================================
-final class ShareExportManager {
-    func exportWithCaption(videoURL: URL, caption: String, completion: @escaping (URL?) -> Void) {
-        let asset = AVAsset(url: videoURL)
-        let mixComposition = AVMutableComposition()
-        guard
-            let assetVideoTrack = asset.tracks(withMediaType: .video).first,
-            let compVideoTrack = mixComposition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)
-        else { completion(nil); return }
-        do {
-            try compVideoTrack.insertTimeRange(CMTimeRange(start: .zero, duration: asset.duration), of: assetVideoTrack, at: .zero)
-        } catch { completion(nil); return }
-
-        // Video composition with CoreAnimation overlay
-        let videoSize = assetVideoTrack.naturalSize
-        let parentLayer = CALayer()
-        let videoLayer = CALayer()
-        parentLayer.frame = CGRect(origin: .zero, size: videoSize)
-        videoLayer.frame = parentLayer.frame
-        parentLayer.addSublayer(videoLayer)
-
-        let textLayer = CATextLayer()
-        textLayer.string = caption
-        textLayer.font = UIFont.boldSystemFont(ofSize: 20)
-        textLayer.fontSize = 20
-        textLayer.alignmentMode = .center
-        textLayer.foregroundColor = UIColor.white.cgColor
-        textLayer.shadowColor = UIColor.black.cgColor
-        textLayer.shadowOpacity = 0.6
-        textLayer.shadowRadius = 4
-        let margin: CGFloat = 24
-        textLayer.frame = CGRect(x: margin, y: 20, width: videoSize.width - margin*2, height: 60)
-        textLayer.contentsScale = UIScreen.main.scale
-        parentLayer.addSublayer(textLayer)
-
-        let videoComposition = AVMutableVideoComposition()
-        videoComposition.renderSize = videoSize
-        videoComposition.frameDuration = CMTime(value: 1, timescale: 30)
-        let instruction = AVMutableVideoCompositionInstruction()
-        instruction.timeRange = CMTimeRange(start: .zero, duration: asset.duration)
-        let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: compVideoTrack)
-        instruction.layerInstructions = [layerInstruction]
-        videoComposition.instructions = [instruction]
-        videoComposition.animationTool = AVVideoCompositionCoreAnimationTool(postProcessingAsVideoLayer: videoLayer, in: parentLayer)
-
-        let outputURL = StorageManager.shared.newVideoURL().deletingPathExtension().appendingPathExtension("mp4")
-        if FileManager.default.fileExists(atPath: outputURL.path) { try? FileManager.default.removeItem(at: outputURL) }
-
-        guard let export = AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality) else { completion(nil); return }
-        export.videoComposition = videoComposition
-        export.outputURL = outputURL
-        export.outputFileType = .mp4
-        export.exportAsynchronously {
-            DispatchQueue.main.async { completion(export.status == .completed ? outputURL : nil) }
-        }
-    }
-}
-
-struct ShareSheet: UIViewControllerRepresentable {
-    let activityItems: [Any]
-    func makeUIViewController(context: Context) -> UIActivityViewController {
-        UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-    }
-    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
-}
+// This has been moved to ShareExportManager.swift
 // =============================================================
 // File: SettingsView.swift (permissions + delete data)
 // =============================================================

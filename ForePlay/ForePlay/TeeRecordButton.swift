@@ -45,9 +45,7 @@ struct TeeRecordButton: View {
 }
 
 // MARK: - Extensions
-extension Color {
-    static let fpGreen = Color(red: 0.173, green: 0.478, blue: 0.173)
-}
+
 
 // MARK: - Preview
 #if DEBUG

@@ -95,6 +95,9 @@ iOSInjectionProject/
 # iOS
 *.hprof
 
+# Sensitive files (API keys, etc.)
+ForePlay/ForePlay/Info.plist
+
 # Temporary files
 *.tmp
 *.temp
