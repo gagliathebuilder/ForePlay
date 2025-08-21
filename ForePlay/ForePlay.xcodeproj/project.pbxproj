@@ -1,0 +1,569 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		1069C6A12E4E82DA006B70FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1069C6882E4E82D9006B70FE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1069C68F2E4E82D9006B70FE;
+			remoteInfo = ForePlay;
+		};
+		1069C6AB2E4E82DA006B70FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1069C6882E4E82D9006B70FE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1069C68F2E4E82D9006B70FE;
+			remoteInfo = ForePlay;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1069C6902E4E82D9006B70FE /* ForePlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ForePlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1069C6A02E4E82DA006B70FE /* ForePlayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ForePlayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1069C6AA2E4E82DA006B70FE /* ForePlayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ForePlayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		1069C6922E4E82D9006B70FE /* ForePlay */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ForePlay;
+			sourceTree = "<group>";
+		};
+		1069C6A32E4E82DA006B70FE /* ForePlayTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ForePlayTests;
+			sourceTree = "<group>";
+		};
+		1069C6AD2E4E82DA006B70FE /* ForePlayUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ForePlayUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1069C68D2E4E82D9006B70FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1069C69D2E4E82DA006B70FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1069C6A72E4E82DA006B70FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1069C6872E4E82D9006B70FE = {
+			isa = PBXGroup;
+			children = (
+				1069C6922E4E82D9006B70FE /* ForePlay */,
+				1069C6A32E4E82DA006B70FE /* ForePlayTests */,
+				1069C6AD2E4E82DA006B70FE /* ForePlayUITests */,
+				1069C6912E4E82D9006B70FE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1069C6912E4E82D9006B70FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1069C6902E4E82D9006B70FE /* ForePlay.app */,
+				1069C6A02E4E82DA006B70FE /* ForePlayTests.xctest */,
+				1069C6AA2E4E82DA006B70FE /* ForePlayUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1069C68F2E4E82D9006B70FE /* ForePlay */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1069C6B42E4E82DA006B70FE /* Build configuration list for PBXNativeTarget "ForePlay" */;
+			buildPhases = (
+				1069C68C2E4E82D9006B70FE /* Sources */,
+				1069C68D2E4E82D9006B70FE /* Frameworks */,
+				1069C68E2E4E82D9006B70FE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				1069C6922E4E82D9006B70FE /* ForePlay */,
+			);
+			name = ForePlay;
+			packageProductDependencies = (
+			);
+			productName = ForePlay;
+			productReference = 1069C6902E4E82D9006B70FE /* ForePlay.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1069C69F2E4E82DA006B70FE /* ForePlayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1069C6B72E4E82DA006B70FE /* Build configuration list for PBXNativeTarget "ForePlayTests" */;
+			buildPhases = (
+				1069C69C2E4E82DA006B70FE /* Sources */,
+				1069C69D2E4E82DA006B70FE /* Frameworks */,
+				1069C69E2E4E82DA006B70FE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1069C6A22E4E82DA006B70FE /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				1069C6A32E4E82DA006B70FE /* ForePlayTests */,
+			);
+			name = ForePlayTests;
+			packageProductDependencies = (
+			);
+			productName = ForePlayTests;
+			productReference = 1069C6A02E4E82DA006B70FE /* ForePlayTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1069C6A92E4E82DA006B70FE /* ForePlayUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1069C6BA2E4E82DA006B70FE /* Build configuration list for PBXNativeTarget "ForePlayUITests" */;
+			buildPhases = (
+				1069C6A62E4E82DA006B70FE /* Sources */,
+				1069C6A72E4E82DA006B70FE /* Frameworks */,
+				1069C6A82E4E82DA006B70FE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1069C6AC2E4E82DA006B70FE /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				1069C6AD2E4E82DA006B70FE /* ForePlayUITests */,
+			);
+			name = ForePlayUITests;
+			packageProductDependencies = (
+			);
+			productName = ForePlayUITests;
+			productReference = 1069C6AA2E4E82DA006B70FE /* ForePlayUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1069C6882E4E82D9006B70FE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					1069C68F2E4E82D9006B70FE = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					1069C69F2E4E82DA006B70FE = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 1069C68F2E4E82D9006B70FE;
+					};
+					1069C6A92E4E82DA006B70FE = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 1069C68F2E4E82D9006B70FE;
+					};
+				};
+			};
+			buildConfigurationList = 1069C68B2E4E82D9006B70FE /* Build configuration list for PBXProject "ForePlay" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1069C6872E4E82D9006B70FE;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 1069C6912E4E82D9006B70FE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1069C68F2E4E82D9006B70FE /* ForePlay */,
+				1069C69F2E4E82DA006B70FE /* ForePlayTests */,
+				1069C6A92E4E82DA006B70FE /* ForePlayUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1069C68E2E4E82D9006B70FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1069C69E2E4E82DA006B70FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1069C6A82E4E82DA006B70FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1069C68C2E4E82D9006B70FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1069C69C2E4E82DA006B70FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1069C6A62E4E82DA006B70FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1069C6A22E4E82DA006B70FE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1069C68F2E4E82D9006B70FE /* ForePlay */;
+			targetProxy = 1069C6A12E4E82DA006B70FE /* PBXContainerItemProxy */;
+		};
+		1069C6AC2E4E82DA006B70FE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1069C68F2E4E82D9006B70FE /* ForePlay */;
+			targetProxy = 1069C6AB2E4E82DA006B70FE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1069C6B22E4E82DA006B70FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1069C6B32E4E82DA006B70FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1069C6B52E4E82DA006B70FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ForePlay/Preview Content\"";
+				DEVELOPMENT_TEAM = S875SYM454;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "ForePlay uses the camera to record your golf swing";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "ForePlay uses the microphone for push-to-talk with CaDi.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "ForePlay uses on-device speech recognition so CaDi can understand you";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chrisgaglia.ForePlay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1069C6B62E4E82DA006B70FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ForePlay/Preview Content\"";
+				DEVELOPMENT_TEAM = S875SYM454;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "ForePlay uses the camera to record your golf swing";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "ForePlay uses the microphone for push-to-talk with CaDi.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "ForePlay uses on-device speech recognition so CaDi can understand you";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chrisgaglia.ForePlay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1069C6B82E4E82DA006B70FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S875SYM454;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.redstapler.ForePlayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ForePlay.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ForePlay";
+			};
+			name = Debug;
+		};
+		1069C6B92E4E82DA006B70FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S875SYM454;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.redstapler.ForePlayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ForePlay.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ForePlay";
+			};
+			name = Release;
+		};
+		1069C6BB2E4E82DA006B70FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S875SYM454;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.redstapler.ForePlayUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ForePlay;
+			};
+			name = Debug;
+		};
+		1069C6BC2E4E82DA006B70FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S875SYM454;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.redstapler.ForePlayUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ForePlay;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1069C68B2E4E82D9006B70FE /* Build configuration list for PBXProject "ForePlay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1069C6B22E4E82DA006B70FE /* Debug */,
+				1069C6B32E4E82DA006B70FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1069C6B42E4E82DA006B70FE /* Build configuration list for PBXNativeTarget "ForePlay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1069C6B52E4E82DA006B70FE /* Debug */,
+				1069C6B62E4E82DA006B70FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1069C6B72E4E82DA006B70FE /* Build configuration list for PBXNativeTarget "ForePlayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1069C6B82E4E82DA006B70FE /* Debug */,
+				1069C6B92E4E82DA006B70FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1069C6BA2E4E82DA006B70FE /* Build configuration list for PBXNativeTarget "ForePlayUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1069C6BB2E4E82DA006B70FE /* Debug */,
+				1069C6BC2E4E82DA006B70FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1069C6882E4E82D9006B70FE /* Project object */;
+}

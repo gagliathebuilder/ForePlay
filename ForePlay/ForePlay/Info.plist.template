@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Required Usage Descriptions -->
+    <key>NSCameraUsageDescription</key>
+    <string>ForePlay needs camera access to record your golf swings for analysis and coaching feedback.</string>
+    
+    <key>NSMicrophoneUsageDescription</key>
+    <string>ForePlay needs microphone access so you can talk to CaDi, your voice golf coach.</string>
+    
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>ForePlay uses speech recognition to understand your questions and provide personalized golf coaching from CaDi.</string>
+    
+    <!-- Optional: OpenAI API Key for Enhanced Voices -->
+    <!-- Uncomment and add your OpenAI API key for native TTS voices -->
+    <!-- <key>OPENAI_API_KEY</key> -->
+    <!-- <string>your-openai-api-key-here</string> -->
+    
+    <!-- App Information -->
+    <key>CFBundleDisplayName</key>
+    <string>ForePlay</string>
+    
+    <key>CFBundleIdentifier</key>
+    <string>com.yourcompany.foreplay</string>
+    
+    <key>CFBundleVersion</key>
+    <string>1.0.0</string>
+    
+    <key>CFBundleShortVersionString</key>
+    <string>1.0.0</string>
+    
+    <!-- Supported Device Orientations -->
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    
+    <!-- Required Device Capabilities -->
+    <key>UIRequiredDeviceCapabilities</key>
+    <array>
+        <string>armv7</string>
+        <string>video-camera</string>
+        <string>microphone</string>
+    </array>
+    
+    <!-- Privacy Labels (iOS 14.5+) -->
+    <key>NSPrivacyAccessedAPITypes</key>
+    <array>
+        <dict>
+            <key>NSPrivacyAccessedAPIType</key>
+            <string>NSPrivacyAccessedAPICameraCapture</string>
+            <key>NSPrivacyAccessedAPITypeReasons</key>
+            <array>
+                <string>ForePlay needs camera access to record golf swings for analysis and coaching feedback.</string>
+            </array>
+        </dict>
+        <dict>
+            <key>NSPrivacyAccessedAPIType</key>
+            <string>NSPrivacyAccessedAPIMicrophoneCapture</string>
+            <key>NSPrivacyAccessedAPITypeReasons</key>
+            <array>
+                <string>ForePlay needs microphone access so you can talk to CaDi, your voice golf coach.</string>
+            </array>
+        </dict>
+    </array>
+    
+    <!-- App Transport Security (if using OpenAI API) -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <false/>
+        <key>NSExceptionDomains</key>
+        <dict>
+            <key>api.openai.com</key>
+            <dict>
+                <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                <false/>
+                <key>NSExceptionMinimumTLSVersion</key>
+                <string>TLSv1.2</string>
+                <key>NSExceptionRequiresForwardSecrecy</key>
+                <true/>
+            </dict>
+        </dict>
+    </dict>
+</dict>
+</plist>
